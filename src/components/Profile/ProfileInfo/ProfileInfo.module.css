@@ -4,6 +4,10 @@
 	opacity: 0.8;
 }
 
+.mainPhoto {
+	max-width: 170px;
+}
+
 .descriptionBlock {
 	padding: 10px;
 	display: flex;
