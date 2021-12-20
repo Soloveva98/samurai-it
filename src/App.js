@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
-import { Route, BrowserRouter, HashRouter } from 'react-router-dom';
+import { Switch, Route, BrowserRouter, HashRouter, Redirect } from 'react-router-dom';
 
 import { withRouter } from 'react-router';
 import HeaderContainer from './components/Header/HeaderContainer';
@@ -41,10 +41,14 @@ class App extends React.Component {
 				<HeaderContainer />
 				<Navbar />
 				<div className='app-wrapper-content'>
-					<Route path='/profile/:userId?' render={withSuspense(ProfileContainer)} />
-					<Route path='/dialogs' render={withSuspense(DialogsContainer)} />
-					<Route path='/users' render={withSuspense(UsersContainer)} />
-					<Route path='/login' render={withSuspense(Login)} />
+					<Switch>
+						<Route exact path='/' render={() => <Redirect to={"/profile"} />} />
+						<Route path='/profile/:userId?' render={withSuspense(ProfileContainer)} />
+						<Route path='/dialogs' render={withSuspense(DialogsContainer)} />
+						<Route path='/users' render={withSuspense(UsersContainer)} />
+						<Route path='/login' render={withSuspense(Login)} />
+						<Route path='*' render={() => <div>404 NOT FOUND</div>} />
+					</Switch>
 				</div>
 			</div>
 		);
